@@ -120,7 +120,7 @@ dependencies节点中添加
 	<uses-permission android:name="android.permission.INTERNET"/>
 
 ###step2
-先写好两个网络请求方法，Observable<RepoHistory> searchHistory(String month, String day)和static Observable<RepoJoke> loadJoke(int page)分别是查询历史今天方法和加载笑话列表
+先写好两个网络请求方法，Observable<RepoHistory> searchHistory(String month, String day)和Observable<RepoJoke> loadJoke(String page)分别是查询历史今天方法和加载笑话列表
 
 网络接口请求服务类
 
@@ -181,13 +181,13 @@ dependencies节点中添加
 	        return getService().searchHistory(map);
 	    }
 	
-	    public static Observable<RepoJoke> loadJoke(int page) {
+	    public static Observable<RepoJoke> loadJoke(String page) {
 	        /**key=d796a03545bddee0b56d913111f5f199&page=2&pagesize=10&sort=asc&time=1418745237*/
 	        Map<String, String> map = new HashMap<>();
 	        map.put("key", "d796a03545bddee0b56d913111f5f199");
 	        map.put("sort", "asc");
 	        map.put("time", "1418745237");
-	        map.put("page", page + "");
+	        map.put("page", page);
 	        map.put("pagesize", "10");
 	        return getService().loadJoke(map);
 	    }
@@ -195,7 +195,7 @@ dependencies节点中添加
 如图
 <img src="https://raw.githubusercontent.com/jjdxmashl/online_image/master/demomvp/icon04.png">
 ###step3
-开始结构MVP模式使用到的基类，如图
+开始架构MVP模式使用到的基类，这里没有使用网上所说的契约类xxxContract把View和Presenter写在一个类中维护，而是分开出来，主要看个人喜好，如图
 
 <img src="https://raw.githubusercontent.com/jjdxmashl/online_image/master/demomvp/icon05.png">
 
@@ -265,8 +265,8 @@ persenter和activity绑定
 
 MVP的Activity基类
 
-	public abstract class BaseActivity<V extends IBaseView, P extends IBasePresenter<V>> extends
-	        AppCompatActivity implements IBaseDelegate<V, P> {
+	public abstract class BaseMVPActivity<V extends IBaseView, P extends IBasePresenter<V>> extends
+	        BaseActivity implements IBaseDelegate<V, P> {
 	
 	    protected P mPresenter;
 	
