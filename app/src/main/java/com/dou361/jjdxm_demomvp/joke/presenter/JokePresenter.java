@@ -27,7 +27,7 @@ import java.util.List;
  * <p/>
  * ========================================
  */
-public class JokePresenter implements IBasePresenter<IJokeView>, IJokePresenter {
+public class JokePresenter implements IBasePresenter<IJokeView> {
 
     private IJokeView mView;
     private JokeModel mModel;
@@ -47,20 +47,16 @@ public class JokePresenter implements IBasePresenter<IJokeView>, IJokePresenter 
         this.mView = null;
     }
 
-
-    @Override
     public void showData(List<JokeBean> list) {
         mView.dismiss();
         mView.showData(list);
     }
 
-    @Override
     public void showEmpty() {
         mView.dismiss();
         mView.showEmpty();
     }
 
-    @Override
     public void checkData(String msg) {
         mView.checkData(msg);
     }

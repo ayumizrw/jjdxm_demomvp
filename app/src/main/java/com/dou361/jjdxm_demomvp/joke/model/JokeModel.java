@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.dou361.jjdxm_demomvp.api.ApiUtils;
 import com.dou361.jjdxm_demomvp.base.BaseModel;
-import com.dou361.jjdxm_demomvp.joke.presenter.IJokePresenter;
+import com.dou361.jjdxm_demomvp.joke.presenter.JokePresenter;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -30,10 +30,10 @@ import rx.schedulers.Schedulers;
  * <p/>
  * ========================================
  */
-public class JokeModel extends BaseModel<IJokePresenter> {
+public class JokeModel extends BaseModel<JokePresenter> {
 
-    public JokeModel(IJokePresenter iPresenter) {
-        super(iPresenter);
+    public JokeModel(JokePresenter presenter) {
+        super(presenter);
     }
 
     public void loadJoke(String page) {

@@ -36,12 +36,12 @@ package com.dou361.jjdxm_demomvp.base;
  * <p/>
  * ========================================
  */
-public abstract class BaseModel<IP> {
+public abstract class BaseModel<SubP> {
 
-    protected IP mIPresenter;
+    protected SubP mPresenter;
 
-    public BaseModel(IP iPresenter) {
-        this.mIPresenter = iPresenter;
+    public BaseModel(SubP presenter) {
+        this.mPresenter = presenter;
     }
 
 }

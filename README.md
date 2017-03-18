@@ -31,7 +31,6 @@ MVP模式是一种架构模式，也是一种经典的界面模式。MVP中的M�
 	|	|	|		xxxModel
 	|	|	|		xxxBean
 	|	|	|----presenter			连接View和Model的桥梁
-	|	|	|		IxxxPresenter
 	|	|	|		xxxPresenter
 	|	|	|----ui					UI界面相关的类
 	|	|	|		xxxActivity
@@ -63,7 +62,6 @@ MVP模式是一种架构模式，也是一种经典的界面模式。MVP中的M�
 	|	|		xxxModel
 	|	|		xxxBean
 	|	|----presenter				连接View和Model的桥梁
-	|	|		IxxxPresenter
 	|	|		xxxPresenter
 	|	|----view					UI界面提炼出来的接口
 	|	|		xxxView
@@ -216,12 +214,12 @@ UI界面抽象出来的接口
 
 业务逻辑实现的基类
 
-	public abstract class BaseModel<IP> {
+	public abstract class BaseModel<SubP> {
 	
-	    protected IP mIPresenter;
+	    protected SubP mPresenter;
 	
-	    public BaseModel(IP iPresenter) {
-	        this.mIPresenter = iPresenter;
+	    public BaseModel(SubP presenter) {
+	        this.mPresenter = presenter;
 	    }
 	
 	}
@@ -315,27 +313,12 @@ MVP的Activity基类
 	    void showMessage(String msg);
 	}
 
-####2.Model的连接
-对应的新建IHistoryPresenter，此接口作用是连接Model
-
-	public interface IHistoryPresenter {
-	
-	    /**显示数据*/
-	    void showData(List<HistoryBean> list);
-	
-	    /**提示无数据*/
-	    void showEmpty();
-	
-	    /**数据检测提示*/
-	    void showMessage(String msg);
-	}
-
-####3.Model的实现
+####2.Model的实现
 具体的逻辑实现，这里只有一个方法就是查询历史今天
 
-	public class HistoryModel extends BaseModel<IHistoryPresenter> {
+	public class HistoryModel extends BaseModel<HistoryPresenter> {
 	
-	    public HistoryModel(IHistoryPresenter iPresenter) {
+	    public HistoryModel(HistoryPresenter iPresenter) {
 	        super(iPresenter);
 	    }
 	
@@ -375,9 +358,9 @@ MVP的Activity基类
 	    }
 	}
 
-####4.Presenter桥梁的实现
+####3.Presenter桥梁的实现
 
-	public class HistoryPresenter implements IBasePresenter<IHistoryView>, IHistoryPresenter {
+	public class HistoryPresenter implements IBasePresenter<IHistoryView> {
 	
 	    private IHistoryView mView;
 	    private HistoryModel mModel;
@@ -396,33 +379,28 @@ MVP的Activity基类
 	    public void detachView() {
 	        this.mView = null;
 	    }
-	
-	
-	    @Override
+
 	    public void showData(List<HistoryBean> list) {
 	        mView.dismiss();
 	        mView.showData(list);
 	    }
-	
-	    @Override
+
 	    public void showEmpty() {
 	        mView.dismiss();
 	        mView.showEmpty();
 	    }
-	
-	    @Override
+
 	    public void showMessage(String msg) {
 	        mView.showMessage(msg);
 	    }
-	
-	
+
 	    public void searchHistory(String month, String day) {
 	        mView.showLoading();
 	        mModel.searchHistory(month, day);
 	    }
 	}
 
-####5.最后在HistoryActivity里面去建立连接
+####4.最后在HistoryActivity里面去建立连接
 最后创建的类架构图如下：
 
 <img src="https://raw.githubusercontent.com/jjdxmashl/online_image/master/demomvp/icon06.png">

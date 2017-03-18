@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.dou361.jjdxm_demomvp.api.ApiUtils;
 import com.dou361.jjdxm_demomvp.base.BaseModel;
-import com.dou361.jjdxm_demomvp.history.presenter.IHistoryPresenter;
+import com.dou361.jjdxm_demomvp.history.presenter.HistoryPresenter;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -30,10 +30,10 @@ import rx.schedulers.Schedulers;
  * <p/>
  * ========================================
  */
-public class HistoryModel extends BaseModel<IHistoryPresenter> {
+public class HistoryModel extends BaseModel<HistoryPresenter> {
 
-    public HistoryModel(IHistoryPresenter iPresenter) {
-        super(iPresenter);
+    public HistoryModel(HistoryPresenter presenter) {
+        super(presenter);
     }
 
     public void searchHistory(String month, String day) {

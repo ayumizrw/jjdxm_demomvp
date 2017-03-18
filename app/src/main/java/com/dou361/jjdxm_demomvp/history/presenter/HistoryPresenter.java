@@ -27,7 +27,7 @@ import java.util.List;
  * <p/>
  * ========================================
  */
-public class HistoryPresenter implements IBasePresenter<IHistoryView>, IHistoryPresenter {
+public class HistoryPresenter implements IBasePresenter<IHistoryView> {
 
     private IHistoryView mView;
     private HistoryModel mModel;
@@ -47,20 +47,16 @@ public class HistoryPresenter implements IBasePresenter<IHistoryView>, IHistoryP
         this.mView = null;
     }
 
-
-    @Override
     public void showData(List<HistoryBean> list) {
         mView.dismiss();
         mView.showData(list);
     }
 
-    @Override
     public void showEmpty() {
         mView.dismiss();
         mView.showEmpty();
     }
 
-    @Override
     public void showMessage(String msg) {
         mView.showMessage(msg);
     }
